@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+}
+
+
+
+repositories {
+    mavenCentral()
+}
+
+//this configuration allows builds to continue even if there are
+//checkstyle errors or warnings.
+// change true to false to make checkstyle force you to fix things
+
+
+//edit the main class and the archive base name
+jar {
+    manifest {
+        attributes 'Main-Class': 'ui.GUI'
+    }
+    archiveBaseName = 'Mancala'
+}
+
+//change the class name on line 25 to match
+task echo;
+
+//edit the names at the end of lines 35 and 36
+echo.doFirst {
+    println "To run the program from jar:\njava -jar build/libs/Mancala.jar"
+    println "To run the program from class files:\njava -cp build/classes/java/main ui.GUI"
+}
+test {
+    useJUnitPlatform()
+}
+
+
+dependencies {
+    testImplementation("org.junit.jupiter:junit-jupiter:5.9.2")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
